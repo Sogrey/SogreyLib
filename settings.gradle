@@ -1,0 +1,1 @@
+include ':app', ':http', ':views', ':utils', ':camera', ':zxing', ':db', ':base', ':zip', ':jsbridge'

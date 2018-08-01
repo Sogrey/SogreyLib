@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/SogreyLib.iml" filepath="$PROJECT_DIR$/SogreyLib.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/base/base.iml" filepath="$PROJECT_DIR$/base/base.iml" />
+      <module fileurl="file://$PROJECT_DIR$/camera/camera.iml" filepath="$PROJECT_DIR$/camera/camera.iml" />
+      <module fileurl="file://$PROJECT_DIR$/db/db.iml" filepath="$PROJECT_DIR$/db/db.iml" />
+      <module fileurl="file://$PROJECT_DIR$/http/http.iml" filepath="$PROJECT_DIR$/http/http.iml" />
+      <module fileurl="file://$PROJECT_DIR$/jsbridge/jsbridge.iml" filepath="$PROJECT_DIR$/jsbridge/jsbridge.iml" />
+      <module fileurl="file://$PROJECT_DIR$/utils/utils.iml" filepath="$PROJECT_DIR$/utils/utils.iml" />
+      <module fileurl="file://$PROJECT_DIR$/views/views.iml" filepath="$PROJECT_DIR$/views/views.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zip/zip.iml" filepath="$PROJECT_DIR$/zip/zip.iml" />
+      <module fileurl="file://$PROJECT_DIR$/zxing/zxing.iml" filepath="$PROJECT_DIR$/zxing/zxing.iml" />
+    </modules>
+  </component>
+</project>
