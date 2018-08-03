@@ -20,6 +20,7 @@ import static android.content.Context.LAYOUT_INFLATER_SERVICE;
 public class AlertUtils {
     public AlertUtils() {
     }
+
     @SuppressWarnings("unchecked")
     public AlertDialog alert(Context context, String title, String message, String ok, DialogInterface.OnClickListener okListener, String cancle, DialogInterface.OnClickListener cancleListener, String ignore, DialogInterface.OnClickListener ignoreListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
@@ -55,14 +56,6 @@ public class AlertUtils {
         return dialog;
     }
 
-//    public AlertDialog alert(String title, String message, String ok, DialogInterface.OnClickListener okListener, String cancle, DialogInterface.OnClickListener cancleListener) {
-//        return alert(title, message, ok, okListener, cancle, cancleListener, null, null);
-//    }
-//
-//    public AlertDialog alert(String title, String message, String ok, DialogInterface.OnClickListener okListener) {
-//        return alert(title, message, ok, okListener, null, null, null, null);
-//    }
-
     public AlertDialog alert(Context context, String title, String message, String ok, DialogInterface.OnClickListener okListener, String cancle, DialogInterface.OnClickListener cancleListener) {
         return alert(context, title, message, ok, okListener, cancle, cancleListener, null, null);
     }
@@ -71,6 +64,7 @@ public class AlertUtils {
         return alert(context, title, message, ok, okListener, null, null, null, null);
     }
 
+    @Deprecated
     public AlertDialog progressDialog(Context context, String title, String message) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         if (!TextUtils.isEmpty(title)) {
@@ -95,44 +89,21 @@ public class AlertUtils {
         dialog.show();
         return dialog;
     }
-//    public ProgressDialog progressDialog(Context context,String title, String message) {
-//        final ProgressDialog dialog = new ProgressDialog(context);
-//        dialog.setProgressStyle(ProgressDialog.STYLE_SPINNER);// 设置进度条的形式为圆形转动的进度条
-//        dialog.setCancelable(false);// 设置是否可以通过点击Back键取消
-//        dialog.setCanceledOnTouchOutside(false);// 设置在点击Dialog外是否取消Dialog进度条
-//        // 设置提示的title的图标，默认是没有的，如果没有设置title的话只设置Icon是不会显示图标的
-//        if (!TextUtils.isEmpty(title)) dialog.setTitle(title);
-////        //设置可点击的按钮，最多有三个(默认情况下)
-////        dialog.setButton(DialogInterface.BUTTON_POSITIVE, "确定", new DialogInterface.OnClickListener() {
-////
-////            @Override
-////            public void onClick(DialogInterface dialog, int which) {
-////                // TODO Auto-generated method stub
-////
-////            }
-////        });
-////        dialog.setButton(DialogInterface.BUTTON_NEGATIVE, "取消", new DialogInterface.OnClickListener() {
-////
-////            @Override
-////            public void onClick(DialogInterface dialog, int which) {
-////                // TODO Auto-generated method stub
-////
-////            }
-////        });
-////        dialog.setButton(DialogInterface.BUTTON_NEUTRAL, "中立", new DialogInterface.OnClickListener() {
-////
-////            @Override
-////            public void onClick(DialogInterface dialog, int which) {
-////                // TODO Auto-generated method stub
-////
-////            }
-////        });
-//        dialog.setMessage(message);
-//        dialog.show();
-//        return dialog;
-//    }
 
-
+    /**
+     * 进度对话框
+     *
+     * @param context        上下文
+     * @param title          标题
+     * @param message        消息内容
+     * @param ok             确定钮
+     * @param okListener     确定事件
+     * @param cancle         取消钮
+     * @param cancleListener 取消事件
+     * @param ignore         忽略钮
+     * @param ignoreListener 忽略事件
+     * @return
+     */
     public AlertDialog alertProgress(Context context, String title, String message,
                                      String ok, DialogInterface.OnClickListener okListener,
                                      String cancle, DialogInterface.OnClickListener cancleListener,
@@ -176,6 +147,13 @@ public class AlertUtils {
         return dialog;
     }
 
+    /**
+     * 更新上面进度框
+     *
+     * @param dialog   传入上面方法返回值（AlertDialog对象）
+     * @param resTemp  内容（带有占位符，表示进度）
+     * @param progress 进度 0-100
+     */
     public void updateProgress(AlertDialog dialog, int resTemp, int progress) {
         if (dialog != null) {
             TextView tv = dialog.getWindow().findViewById(R.id.txt_progress);
@@ -188,12 +166,34 @@ public class AlertUtils {
         }
     }
 
+    /**
+     * 进度对话框
+     *
+     * @param context        上下文
+     * @param title          标题
+     * @param message        消息内容
+     * @param ok             确定钮
+     * @param okListener     确定事件
+     * @param cancle         取消钮
+     * @param cancleListener 取消事件
+     * @return
+     */
     public AlertDialog alertProgress(Context context, String title, String message,
                                      String ok, DialogInterface.OnClickListener okListener,
                                      String cancle, DialogInterface.OnClickListener cancleListener) {
         return alertProgress(context, title, message, ok, okListener, cancle, cancleListener, null, null);
     }
 
+    /**
+     * 进度对话框
+     *
+     * @param context    上下文
+     * @param title      标题
+     * @param message    消息内容
+     * @param ok         确定钮
+     * @param okListener 确定事件
+     * @return
+     */
     public AlertDialog alertProgress(Context context, String title, String message,
                                      String ok, DialogInterface.OnClickListener okListener) {
         return alertProgress(context, title, message, ok, okListener, null, null, null, null);
@@ -202,15 +202,15 @@ public class AlertUtils {
     /**
      * 等待框
      *
-     * @param context
-     * @param title
-     * @param message
-     * @param ok
-     * @param okListener
-     * @param cancle
-     * @param cancleListener
-     * @param ignore
-     * @param ignoreListener
+     * @param context        上下文
+     * @param title          标题
+     * @param message        消息内容
+     * @param ok             确定钮
+     * @param okListener     确定事件
+     * @param cancle         取消钮
+     * @param cancleListener 取消事件
+     * @param ignore         忽略钮
+     * @param ignoreListener 忽略事件
      */
     public AlertDialog alertWaiting(Context context, String title, String message,
                                     String ok, DialogInterface.OnClickListener okListener,
@@ -254,17 +254,44 @@ public class AlertUtils {
         return dialog;
     }
 
+    /**
+     * 等待框
+     *
+     * @param context        上下文
+     * @param title          标题
+     * @param message        消息内容
+     * @param ok             确定钮
+     * @param okListener     确定事件
+     * @param cancle         取消钮
+     * @param cancleListener 取消事件
+     */
     public AlertDialog alertWaiting(Context context, String title, String message,
                                     String ok, DialogInterface.OnClickListener okListener,
                                     String cancle, DialogInterface.OnClickListener cancleListener) {
         return alertWaiting(context, title, message, ok, okListener, cancle, cancleListener, "", null);
     }
 
+    /**
+     * 等待框
+     *
+     * @param context    上下文
+     * @param title      标题
+     * @param message    消息内容
+     * @param ok         确定钮
+     * @param okListener 确定事件
+     */
     public AlertDialog alertWaiting(Context context, String title, String message,
                                     String ok, DialogInterface.OnClickListener okListener) {
         return alertWaiting(context, title, message, ok, okListener, "", null);
     }
 
+    /**
+     * 等待框
+     *
+     * @param context 上下文
+     * @param title   标题
+     * @param message 消息内容
+     */
     public AlertDialog alertWaiting(Context context, String title, String message) {
         return alertWaiting(context, title, message, "", null);
     }
