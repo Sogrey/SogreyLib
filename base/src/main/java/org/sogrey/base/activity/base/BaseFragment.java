@@ -218,21 +218,18 @@ public abstract class BaseFragment extends Fragment {
         intent.setClass(mContext, cls);
         if (bundle != null)
             intent.putExtras(bundle);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        new Handler().postDelayed(() -> {
 
-                startActivity(intent);
-                if (animIn != 0 && animOut != 0) {
-                    try {
-                        mContext.overridePendingTransition(animIn, animOut);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            startActivity(intent);
+            if (animIn != 0 && animOut != 0) {
+                try {
+                    mContext.overridePendingTransition(animIn, animOut);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                if (isFinish)
-                    mContext.finish();
             }
+            if (isFinish)
+                mContext.finish();
         }, delay < 0 ? DELAY : delay);
     }
 
@@ -326,17 +323,14 @@ public abstract class BaseFragment extends Fragment {
         intent.setClass(mContext, cls);
         if (bundle != null)
             intent.putExtras(bundle);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        new Handler().postDelayed(() -> {
 
-                startActivityForResult(intent, requestCode);
-                if (animIn != 0 && animOut != 0) {
-                    try {
-                        mContext.overridePendingTransition(animIn, animOut);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            startActivityForResult(intent, requestCode);
+            if (animIn != 0 && animOut != 0) {
+                try {
+                    mContext.overridePendingTransition(animIn, animOut);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }, delay < 0 ? DELAY : delay);

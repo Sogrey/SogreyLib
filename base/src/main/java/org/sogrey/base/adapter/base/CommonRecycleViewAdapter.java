@@ -51,25 +51,19 @@ public abstract class CommonRecycleViewAdapter<T> extends RecyclerView
     @SuppressWarnings("unchecked")
     protected void initEvent(final CommonRecycleViewHolder holder,final int position) {
         holder.itemView.setOnClickListener(
-                new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-                        if (mOnItemClickListener!=null) {
-                            mOnItemClickListener.onItemClick(holder.itemView,position,mData.get(position));
-                        }
+                v -> {
+                    if (mOnItemClickListener!=null) {
+                        mOnItemClickListener.onItemClick(holder.itemView,position,mData.get(position));
                     }
                 }
         );
         holder.itemView.setOnLongClickListener(
-                new View.OnLongClickListener() {
-                    @Override
-                    public boolean onLongClick(View v) {
-                        if (mOnItemLongClickListener!=null) {
-                            mOnItemLongClickListener.onItemLongClick(holder.itemView,position,mData.get(position));
-                            return true;
-                        }
-                        return false;
+                v -> {
+                    if (mOnItemLongClickListener!=null) {
+                        mOnItemLongClickListener.onItemLongClick(holder.itemView,position,mData.get(position));
+                        return true;
                     }
+                    return false;
                 }
         );
     }

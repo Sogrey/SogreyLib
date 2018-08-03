@@ -137,8 +137,8 @@ public abstract class CommonAdapter<T> extends BaseAdapter {
 	 */
 	public void removePositions(int... positions) {
 		if (positions != null) {
-			for (int i = 0; i < positions.length; i++) {
-				mPositions.remove((Integer) positions[i]);
+			for (int position : positions) {
+				mPositions.remove((Integer) position);
 			}
 		}
 	}

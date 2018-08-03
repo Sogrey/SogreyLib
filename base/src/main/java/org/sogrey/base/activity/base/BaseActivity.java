@@ -113,47 +113,11 @@ public abstract class BaseActivity extends AppCompatActivity {
         }
     }
 
-    // 退出提示;
-    public void showExitDialog() {
+    /**
+     * 退出提示; 子类实现
+     */
 
-//        AlertUtils.getInstance(mContext).alert("",);
-//
-//        if (mDailogUtils!=null&&mDailogUtils.isShowing()) {
-//            mDailogUtils.dismiss();
-//        }
-//        if (mDailogUtils==null) {
-//            mDailogUtils=new DialogUtils(this,R.style.CircularDialog) {
-//
-//                @Override
-//                public void ok() {
-//                    exit();
-//                    toCancle();
-//                }
-//
-//                @Override
-//                public void cancle() {
-//                    toCancle();
-//                }
-//
-//                @Override
-//                public void ignore() {
-//                }
-//            };
-//            mDailogUtils.show();
-//            TextView tv=new TextView(this);
-//            tv.setText("确定退出程序？");
-//            tv.setGravity(Gravity.CENTER);
-//            mDailogUtils.setContent(tv);
-//            mDailogUtils.setDialogTitle("退出");
-//            mDailogUtils.setDialogCancleBtn("取消");
-//            mDailogUtils.setDialogOkBtn("确定");
-//            mDailogUtils.setDialogCancleBtnColor(getResources().getColor(
-//                    R.color.darkgreen));
-//            mDailogUtils.setDialogOkBtnColor(getResources().getColor(
-//                    R.color.darkred));
-//        } else {
-//            mDailogUtils.show();
-//        }
+    public void showExitDialog() {
     }
 
     /**
@@ -230,12 +194,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void finishThisDelay() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                finishThis();
-            }
-        },1000);
+        new Handler().postDelayed(() -> finishThis(),1000);
     }
 
     public void finishThisRemain() {
@@ -244,12 +203,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void finishThisRemainDelay() {
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                finishThisRemain();
-            }
-        },1000);
+        new Handler().postDelayed(() -> finishThisRemain(),1000);
     }
 
     /**
@@ -408,21 +362,18 @@ public abstract class BaseActivity extends AppCompatActivity {
         intent.setClass(this,cls);
         if (bundle!=null)
             intent.putExtras(bundle);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        new Handler().postDelayed(() -> {
 
-                startActivity(intent);
-                if (animIn!=0&&animOut!=0) {
-                    try {
-                        overridePendingTransition(animIn,animOut);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            startActivity(intent);
+            if (animIn!=0&&animOut!=0) {
+                try {
+                    overridePendingTransition(animIn,animOut);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
-                if (isFinish)
-                    finish();
             }
+            if (isFinish)
+                finish();
         },delay<0 ? DELAY : delay);
     }
 
@@ -541,17 +492,14 @@ public abstract class BaseActivity extends AppCompatActivity {
         intent.setClass(this,cls);
         if (bundle!=null)
             intent.putExtras(bundle);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        new Handler().postDelayed(() -> {
 
-                startActivityForResult(intent,requestCode);
-                if (animIn!=0&&animOut!=0) {
-                    try {
-                        overridePendingTransition(animIn,animOut);
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            startActivityForResult(intent,requestCode);
+            if (animIn!=0&&animOut!=0) {
+                try {
+                    overridePendingTransition(animIn,animOut);
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         },delay<0 ? DELAY : delay);

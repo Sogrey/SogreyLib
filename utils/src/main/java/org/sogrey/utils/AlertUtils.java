@@ -22,7 +22,10 @@ public class AlertUtils {
     }
 
     @SuppressWarnings("unchecked")
-    public AlertDialog alert(Context context, String title, String message, String ok, DialogInterface.OnClickListener okListener, String cancle, DialogInterface.OnClickListener cancleListener, String ignore, DialogInterface.OnClickListener ignoreListener) {
+    public AlertDialog alert(Context context, String title, String message,
+                             String ok, DialogInterface.OnClickListener okListener,
+                             String cancle, DialogInterface.OnClickListener cancleListener,
+                             String ignore, DialogInterface.OnClickListener ignoreListener) {
         AlertDialog.Builder builder = new AlertDialog.Builder(context);
         if (!TextUtils.isEmpty(title)) {
             builder.setTitle(title);
@@ -42,11 +45,9 @@ public class AlertUtils {
 
         // 不需要绑定按键事件
         // 屏蔽keycode等于84之类的按键
-        builder.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                Log.v("alert", "keyCode==" + keyCode + "event=" + event);
-                return true;
-            }
+        builder.setOnKeyListener((dialog, keyCode, event) -> {
+            Log.v("alert", "keyCode==" + keyCode + "event=" + event);
+            return true;
         });
         // 禁止响应按back键的事件
         builder.setCancelable(false);
@@ -56,11 +57,14 @@ public class AlertUtils {
         return dialog;
     }
 
-    public AlertDialog alert(Context context, String title, String message, String ok, DialogInterface.OnClickListener okListener, String cancle, DialogInterface.OnClickListener cancleListener) {
+    public AlertDialog alert(Context context, String title, String message,
+                             String ok, DialogInterface.OnClickListener okListener,
+                             String cancle, DialogInterface.OnClickListener cancleListener) {
         return alert(context, title, message, ok, okListener, cancle, cancleListener, null, null);
     }
 
-    public AlertDialog alert(Context context, String title, String message, String ok, DialogInterface.OnClickListener okListener) {
+    public AlertDialog alert(Context context, String title, String message,
+                             String ok, DialogInterface.OnClickListener okListener) {
         return alert(context, title, message, ok, okListener, null, null, null, null);
     }
 
@@ -72,11 +76,9 @@ public class AlertUtils {
         }
         // 不需要绑定按键事件
         // 屏蔽keycode等于84之类的按键
-        builder.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                Log.v("alert", "keyCode==" + keyCode + "event=" + event);
-                return true;
-            }
+        builder.setOnKeyListener((dialog, keyCode, event) -> {
+            Log.v("alert", "keyCode==" + keyCode + "event=" + event);
+            return true;
         });
         // 禁止响应按back键的事件
         builder.setCancelable(false);
@@ -127,11 +129,9 @@ public class AlertUtils {
 
         // 不需要绑定按键事件
         // 屏蔽keycode等于84之类的按键
-        builder.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                Log.v("alert", "keyCode==" + keyCode + "event=" + event);
-                return true;
-            }
+        builder.setOnKeyListener((dialog, keyCode, event) -> {
+            Log.v("alert", "keyCode==" + keyCode + "event=" + event);
+            return true;
         });
         // 禁止响应按back键的事件
         builder.setCancelable(false);
@@ -235,11 +235,9 @@ public class AlertUtils {
 
         // 不需要绑定按键事件
         // 屏蔽keycode等于84之类的按键
-        builder.setOnKeyListener(new DialogInterface.OnKeyListener() {
-            public boolean onKey(DialogInterface dialog, int keyCode, KeyEvent event) {
-                Log.v("alert", "keyCode==" + keyCode + "event=" + event);
-                return true;
-            }
+        builder.setOnKeyListener((dialog, keyCode, event) -> {
+            Log.v("alert", "keyCode==" + keyCode + "event=" + event);
+            return true;
         });
         // 禁止响应按back键的事件
         builder.setCancelable(false);
