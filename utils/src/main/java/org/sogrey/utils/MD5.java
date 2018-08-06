@@ -34,8 +34,7 @@ public class MD5 {
             int j = md.length;
             char str[] = new char[j * 2];
             int k = 0;
-            for (int i = 0; i < j; i++) {   //  i = 0
-                byte byte0 = md[i];  //95
+            for (byte byte0 : md) {   //  i = 0
                 str[k++] = md5String[byte0 >>> 4 & 0xf];    //    5
                 str[k++] = md5String[byte0 & 0xf];   //   F
             }

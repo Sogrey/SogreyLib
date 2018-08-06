@@ -55,11 +55,11 @@ public class MathUtil {
 		for (int n = 0; n < length; ++n) {
 			stmp = Integer.toHexString(b[n]&0xFF);
 			if (stmp.length() == 1)
-				hs = hs + "0" + stmp;
+				hs = String.format("%s0%s", hs, stmp);
 			else {
-				hs = hs + stmp;
+				hs = String.format("%s%s", hs, stmp);
 			}
-			hs = hs + ",";
+			hs = String.format("%s,", hs);
 		}
 		return hs.toUpperCase();
 	}
@@ -230,8 +230,8 @@ public class MathUtil {
 	 */
 	public static int average(int[] pixels) {
 		float m = 0;
-		for (int i = 0; i < pixels.length; ++i) {
-			m += pixels[i];
+		for (int pixel : pixels) {
+			m += pixel;
 		}
 		m = m / pixels.length;
 		return (int) m;
@@ -246,8 +246,8 @@ public class MathUtil {
 	 */
 	public static int average(double[] pixels) {
 		float m = 0;
-		for (int i = 0; i < pixels.length; ++i) {
-			m += pixels[i];
+		for (double pixel : pixels) {
+			m += pixel;
 		}
 		m = m / pixels.length;
 		return (int) m;
@@ -305,12 +305,8 @@ public class MathUtil {
 	public static boolean pointAtELine(double x, double y, double x1,
 			double y1, double x2, double y2) {
 		if (pointAtSLine(x, y, x1, y1, x2, y2)) {
-			if (x>=Math.min(x1,x2)&&x<=Math.max(x1,x2)
-				&&y>=Math.min(y1,y2)&&y<=Math.max(y1,y2)) {
-				return true;
-			} else {
-				return false;
-			}
+			return x>=Math.min(x1,x2)&&x<=Math.max(x1,x2)
+				&&y>=Math.min(y1,y2)&&y<=Math.max(y1,y2);
 		} else {
 			return false;
 		}
@@ -417,16 +413,14 @@ public class MathUtil {
 					/ ((y2 - y1) * (x3 - x4) - (y4 - y3) * (x1 - x2));
 			double y = (x1 * y2 - y1 * x2 - x * (y2 - y1)) / (x1 - x2);
 			// System.out.println("直线的交点("+x+","+y+")");
-			if (x>=Math.min(x1,x2)&&x<=Math.max(x1,x2)
+			return x>=Math.min(x1,x2)&&x<=Math.max(x1,x2)
 				&&y>=Math.min(y1,y2)&&y<=Math.max(y1,y2)
 				&&x>=Math.min(x3,x4)&&x<=Math.max(x3,x4)
-				&&y>=Math.min(y3,y4)&&y<=Math.max(y3,y4)) {
+				&&y>=Math.min(y3,y4)&&y<=Math.max(y3,y4);
 				// System.out.println("交点（"+x+","+y+"）在线段上");
-				return true;
-			} else {
+//				return true;
 				// System.out.println("交点（"+x+","+y+"）不在线段上");
-				return false;
-			}
+//				return false;
 		}
 	}
 
@@ -480,14 +474,12 @@ public class MathUtil {
 					/ ((y2 - y1) * (x3 - x4) - (y4 - y3) * (x1 - x2));
 			double y = (x1 * y2 - y1 * x2 - x * (y2 - y1)) / (x1 - x2);
 			// System.out.println("交点("+x+","+y+")");
-			if (x>=Math.min(x1,x2)&&x<=Math.max(x1,x2)
-				&&y>=Math.min(y1,y2)&&y<=Math.max(y1,y2)) {
+			return x>=Math.min(x1,x2)&&x<=Math.max(x1,x2)
+				&&y>=Math.min(y1,y2)&&y<=Math.max(y1,y2);
 				// System.out.println("交点（"+x+","+y+"）在线段上");
-				return true;
-			} else {
+//				return true;
 				// System.out.println("交点（"+x+","+y+"）不在线段上");
-				return false;
-			}
+//				return false;
 		}
 	}
 
@@ -529,14 +521,12 @@ public class MathUtil {
 	 */
 	public static boolean pointAtRect(double x, double y, double x1, double y1,
 			double x2, double y2) {
-		if (x>=Math.min(x1,x2)&&x<=Math.max(x1,x2)
-			&&y>=Math.min(y1,y2)&&y<=Math.max(y1,y2)) {
+		return x>=Math.min(x1,x2)&&x<=Math.max(x1,x2)
+			&&y>=Math.min(y1,y2)&&y<=Math.max(y1,y2);
 			// System.out.println("点（"+x+","+y+"）在矩形内上");
-			return true;
-		} else {
+//			return true;
 			// System.out.println("点（"+x+","+y+"）不在矩形内上");
-			return false;
-		}
+//			return false;
 	}
 
 	/**
@@ -577,16 +567,14 @@ public class MathUtil {
 	 */
 	public static boolean rectAtRect(double x1, double y1, double x2,
 			double y2, double x3, double y3, double x4, double y4) {
-		if (x1>=Math.min(x3,x4)&&x1<=Math.max(x3,x4)
+		return x1>=Math.min(x3,x4)&&x1<=Math.max(x3,x4)
 			&&y1>=Math.min(y3,y4)&&y1<=Math.max(y3,y4)
 			&&x2>=Math.min(x3,x4)&&x2<=Math.max(x3,x4)
-			&&y2>=Math.min(y3,y4)&&y2<=Math.max(y3,y4)) {
+			&&y2>=Math.min(y3,y4)&&y2<=Math.max(y3,y4);
 			// System.out.println("矩形在矩形内");
-			return true;
-		} else {
+//			return true;
 			// System.out.println("矩形不在矩形内");
-			return false;
-		}
+//			return false;
 	}
 
 	/**
@@ -637,14 +625,11 @@ public class MathUtil {
 			double l2 = Math.abs(y-y2);
 			double l3 = Math.abs(x-x2);
 			double l4 = Math.abs(y-y2);
-			if (r <= l1 && r <= l2 && r <= l3 && r <= l4) {
+			return r <= l1 && r <= l2 && r <= l3 && r <= l4;
 				// System.out.println("圆在矩形内");
-				return true;
-			} else {
+//				return true;
 				// System.out.println("圆不在矩形内");
-				return false;
-			}
-
+//				return false;
 		} else {
 			// System.out.println("圆不在矩形内");
 			return false;
@@ -825,17 +810,20 @@ public class MathUtil {
 	 */
 	public static boolean isRectCollision(float x1, float y1, float w1,
 			float h1, float x2, float y2, float w2, float h2) {
-		if (x2 > x1 && x2 > x1 + w1) {
-			return false;
-		} else if (x2 < x1 && x2 < x1 - w2) {
-			return false;
-		} else if (y2 > y1 && y2 > y1 + h1) {
-			return false;
-		} else if (y2 < y1 && y2 < y1 - h2) {
-			return false;
-		} else {
-			return true;
-		}
+//		if (x2 > x1 && x2 > x1 + w1) {
+//			return false;
+//		} else if (x2 < x1 && x2 < x1 - w2) {
+//			return false;
+//		} else if (y2 > y1 && y2 > y1 + h1) {
+//			return false;
+//		} else if (y2 < y1 && y2 < y1 - h2) {
+//			return false;
+//		} else {
+//			return true;
+//		}
+
+
+		return !(x2 > x1 && x2 > x1 + w1) && !(x2 < x1 && x2 < x1 - w2) && !(y2 > y1 && y2 > y1 + h1) && !(y2 < y1 && y2 < y1 - h2);
 	}
 
 	/**

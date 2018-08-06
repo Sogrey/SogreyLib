@@ -23,7 +23,7 @@ public class HtmlRegexpUtil {
         if (!hasSpecialChars(input)) {
             return input;
         }
-        StringBuffer filtered = new StringBuffer(input.length());
+        StringBuilder filtered = new StringBuilder(input.length());
 
         char c;
 

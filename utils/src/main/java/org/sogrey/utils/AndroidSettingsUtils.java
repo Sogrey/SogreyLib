@@ -1,11 +1,8 @@
 package org.sogrey.utils;
 
-import android.annotation.TargetApi;
 import android.content.ComponentName;
 import android.content.Context;
 import android.content.Intent;
-import android.os.Build;
-import android.support.annotation.RequiresApi;
 
 /**
  * android 设置相关，跳转到相关设置页面

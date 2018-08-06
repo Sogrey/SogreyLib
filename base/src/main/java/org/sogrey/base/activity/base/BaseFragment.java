@@ -57,9 +57,9 @@ public abstract class BaseFragment extends Fragment {
 
     protected abstract void onCreateView(Bundle savedInstanceState);
 
-    {
-        //setContentView() here
-    }
+//    {
+//        setContentView() here
+//    }
 
     @Override
     public void onDestroyView() {
@@ -345,19 +345,16 @@ public abstract class BaseFragment extends Fragment {
     }
 
     public Drawable getResDrawable(@DrawableRes int id) {
-        Drawable drawable = getResDrawable(mContext, id);
-        return drawable;
+        return getResDrawable(mContext, id);
     }
 
     public Drawable getResDrawable(Context context, @DrawableRes int id) {
         if(context==null) context = BaseApplication.getInstance();
-        Drawable drawable = ContextCompat.getDrawable(context, id);
-        return drawable;
+        return ContextCompat.getDrawable(context, id);
     }
 
     public int getResColor(@ColorRes int id) {
-        int color = ContextCompat.getColor(mContext, id);
-        return color;
+        return ContextCompat.getColor(mContext, id);
     }
 
     public int getResColor(Context context, @DrawableRes int id) {

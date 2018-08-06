@@ -15,11 +15,7 @@
  */
 package org.sogrey.utils;
 
-import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Bundle;
-import android.os.Handler;
-import android.os.Message;
 import android.text.TextUtils;
 import android.view.Gravity;
 import android.view.View;
@@ -40,53 +36,7 @@ public class ToastUtil {
     /**
      * 上下文
      */
-    private static Context mContext = null;
-    /**
-     * 主要Handler类，在线程中可用 what值.提示文本信息
-     */
-    @SuppressLint("HandlerLeak")
-    private static Handler baseHandler = new Handler() {
-
-        @Override
-        public void handleMessage(Message msg) {
-            switch (msg.what) {
-                case SHOW_TOAST:
-                    showToastBottom(mContext, msg.getData().getString("TEXT"));
-                    break;
-                default:
-                    break;
-            }
-        }
-    };
-
-    /**
-     * 描述：在线程中提示文本信息
-     *
-     * @param resId 要提示的字符串资源ID，消息what值为0,
-     */
-    public static void showToastInThread(Context context, int resId) {
-        mContext = context;
-        Message msg = baseHandler.obtainMessage(SHOW_TOAST);
-        Bundle bundle = new Bundle();
-        bundle.putString("TEXT", context.getResources().getString(resId));
-        msg.setData(bundle);
-        baseHandler.sendMessage(msg);
-    }
-
-    /**
-     * 描述：在线程中提示文本信息
-     *
-     * @param context 上下文
-     * @param text    消息文本
-     */
-    public static void showToastInThread(Context context, String text) {
-        mContext = context;
-        Message msg = baseHandler.obtainMessage(SHOW_TOAST);
-        Bundle bundle = new Bundle();
-        bundle.putString("TEXT", text);
-        msg.setData(bundle);
-        baseHandler.sendMessage(msg);
-    }
+    private Context mContext = null;
 
     /**
      * 单例模式（用于全局使用）
@@ -94,7 +44,7 @@ public class ToastUtil {
     private static ToastUtil mToastUtil;
 
     private ToastUtil(Context context) {
-        this.mContext = context;
+        mContext = context;
     }
 
     public static ToastUtil getSingleton(Context context) {
@@ -105,19 +55,19 @@ public class ToastUtil {
     }
 
     public void showToast(String text) {
-        showToast(this.mContext, text);
+        showToast(mContext, text);
     }
 
     public void showToast(int resId) {
-        showToast(this.mContext, resId);
+        showToast(mContext, resId);
     }
 
     public void showToast(String text, int gravity) {
-        showToast(this.mContext, text, gravity);
+        showToast(mContext, text, gravity);
     }
 
     public void showToast(int resId, int gravity) {
-        showToast(this.mContext, resId, gravity);
+        showToast(mContext, resId, gravity);
     }
 
     /**

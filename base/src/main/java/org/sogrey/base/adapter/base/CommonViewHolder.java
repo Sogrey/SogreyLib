@@ -54,7 +54,7 @@ public class CommonViewHolder {
         this.mLayoutId = layoutId;
         this.mPostion = postion;
 
-        this.mView = new SparseArray<View>();
+        this.mView = new SparseArray<>();
         mConvertView = LayoutInflater.from(this.mContext).inflate(
                 this.mLayoutId, null);
         mConvertView.setTag(this);

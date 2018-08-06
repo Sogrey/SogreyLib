@@ -47,7 +47,7 @@ public class CrashHandler implements UncaughtExceptionHandler {
     //程序的Context对象
     private Context mContext;
     //用来存储设备信息和异常信息
-    private Map<String, String> infos = new HashMap<String, String>();
+    private Map<String, String> infos = new HashMap<>();
     //用于格式化日期,作为日志文件名的一部分
     DateFormat formatter = new SimpleDateFormat("log-yyyy-MM-dd-HH-mm-ss");
     OnCrashAfterExceptionHandling mOnCrashAfterExceptionHandling;
@@ -163,11 +163,11 @@ public class CrashHandler implements UncaughtExceptionHandler {
      */
     private String saveCrashInfo2File(Throwable ex) {
 
-        StringBuffer sb = new StringBuffer();
+        StringBuilder sb = new StringBuilder();
         for (Map.Entry<String, String> entry : infos.entrySet()) {
             String key = entry.getKey();
             String value = entry.getValue();
-            sb.append(key + "=" + value + "\n");
+            sb.append(String.format("%s=%s\n", key, value));
         }
 
         Writer writer = new StringWriter();

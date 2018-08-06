@@ -26,7 +26,7 @@ public abstract class SwipeBackActivity extends BaseActivity {
 		layout = (SwipeBackLayout) LayoutInflater.from(this).inflate(
 				R.layout.base_aty_swipeback,null);
 		layout.attachToActivity(this);
-		layout.setDoSomethingBeforeFinish(() -> beforeFinished());
+		layout.setDoSomethingBeforeFinish(this::beforeFinished);
 	}
 
     /**

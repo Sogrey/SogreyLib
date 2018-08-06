@@ -35,6 +35,7 @@ public class BtimapOOMUtils {
 		try {
 			bitmap = BitmapFactory.decodeFile(filePath,opts);
 		} catch (Exception e) {
+			e.printStackTrace();
 		}
 		return bitmap;
 	}

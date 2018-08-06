@@ -270,6 +270,7 @@ public class FileUtil {
                     try {
                         Thread.sleep(500);
                     } catch (Exception e) {
+                        e.printStackTrace();
                     }
                 }
                 fos.flush();
@@ -285,18 +286,21 @@ public class FileUtil {
                 try {
                     dis.close();
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
             if (bis != null) {
                 try {
                     bis.close();
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
             if (fos != null) {
                 try {
                     fos.close();
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -429,12 +433,12 @@ public class FileUtil {
             String fileNameNoMIME = getCacheFileNameFromUrl(url);
             File parentFile = new File(dirPath);
             File[] files = parentFile.listFiles();
-            for (int i = 0; i < files.length; ++i) {
-                String fileName = files[i].getName();
+            for (File file1 : files) {
+                String fileName = file1.getName();
                 String name = fileName.substring(0, fileName.lastIndexOf("."));
                 if (name.equals(fileNameNoMIME)) {
                     // 文件已存在
-                    return files[i].getPath();
+                    return file1.getPath();
                 }
             }
 
@@ -721,8 +725,8 @@ public class FileUtil {
             // 获取后缀
             if (url.lastIndexOf(".") != -1) {
                 suffix = url.substring(url.lastIndexOf("."));
-                if (suffix.indexOf("/") != -1 || suffix.indexOf("?") != -1
-                        || suffix.indexOf("&") != -1) {
+                if (suffix.contains("/") || suffix.contains("?")
+                        || suffix.contains("&")) {
                     suffix = null;
                 }
             }
@@ -818,6 +822,7 @@ public class FileUtil {
                 try {
                     out.close();
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -863,6 +868,7 @@ public class FileUtil {
                 try {
                     fos.close();
                 } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }
@@ -924,7 +930,6 @@ public class FileUtil {
                 fileDownloadDir = downloadRootDir;
                 dbDownloadDir = downloadRootDir;
                 logDir = downloadRootDir;
-                return;
             } else {
 
                 File root = Environment.getExternalStorageDirectory();
@@ -1031,8 +1036,8 @@ public class FileUtil {
             if (files == null) {
                 return true;
             }
-            for (int i = 0; i < files.length; i++) {
-                files[i].delete();
+            for (File file : files) {
+                file.delete();
             }
         } catch (Exception e) {
             e.printStackTrace();
@@ -1058,7 +1063,7 @@ public class FileUtil {
             inputReader = new InputStreamReader(context.getAssets().open(name));
             bufReader = new BufferedReader(inputReader);
             String line = null;
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             while ((line = bufReader.readLine()) != null) {
                 buffer.append(line);
             }
@@ -1097,7 +1102,7 @@ public class FileUtil {
                     .openRawResource(id));
             bufReader = new BufferedReader(inputReader);
             String line = null;
-            StringBuffer buffer = new StringBuffer();
+            StringBuilder buffer = new StringBuilder();
             while ((line = bufReader.readLine()) != null) {
                 buffer.append(line);
             }
@@ -1237,14 +1242,8 @@ public class FileUtil {
      * @param path
      */
     public static boolean deleteFile(String path) {
-        boolean bl;
         File file = new File(path);
-        if (file.exists()) {
-            bl = file.delete();
-        } else {
-            bl = false;
-        }
-        return bl;
+        return file.exists() && file.delete();
     }
 
     /**
@@ -1484,11 +1483,11 @@ public class FileUtil {
     private static long getFileSizes(File f) throws Exception {
         long size = 0;
         File flist[] = f.listFiles();
-        for (int i = 0; i < flist.length; i++) {
-            if (flist[i].isDirectory()) {
-                size = size + getFileSizes(flist[i]);
+        for (File aFlist : flist) {
+            if (aFlist.isDirectory()) {
+                size = size + getFileSizes(aFlist);
             } else {
-                size = size + getFileSize(flist[i]);
+                size = size + getFileSize(aFlist);
             }
         }
         return size;
@@ -1556,7 +1555,6 @@ public class FileUtil {
      */
     public void DeleteFile(File file) {
         if (!file.exists()) {
-            return;
         } else {
             if (file.isFile()) {
                 file.delete();
@@ -1598,8 +1596,8 @@ public class FileUtil {
                 File file = new File(filePath);
                 if (file.isDirectory()) {// 处理目录
                     File files[] = file.listFiles();
-                    for (int i = 0; i < files.length; i++) {
-                        deleteFolderFile(files[i].getAbsolutePath(), true);
+                    for (File file1 : files) {
+                        deleteFolderFile(file1.getAbsolutePath(), true);
                     }
                 }
                 if (deleteThisPath) {

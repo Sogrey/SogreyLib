@@ -1026,6 +1026,7 @@ public class AbImageUtil {
                     bitmap.recycle();
                 }
             } catch (Exception e) {
+                e.printStackTrace();
             }
             bitmap=null;
         }
@@ -1050,6 +1051,7 @@ public class AbImageUtil {
                     }
                 }
             } catch (Exception e) {
+                e.printStackTrace();
             }
         }
     }
@@ -1102,7 +1104,7 @@ public class AbImageUtil {
         // 第五步，计算哈希值。
         // 将上一步的比较结果，组合在一起，就构成了一个64位的整数，
         // 这就是这张图片的指纹。
-        StringBuffer hashCode=new StringBuffer();
+        StringBuilder hashCode=new StringBuilder();
         for (int i=0;i<comps.length;i+=4) {
             int result=comps[i]*(int)Math.pow(2,3)+comps[i+1]
                                                    *(int)Math.pow(2,2)+comps[i+2]
@@ -1110,11 +1112,10 @@ public class AbImageUtil {
                        +comps[i+2];
             hashCode.append(MathUtil.binaryToHex(result));
         }
-        String sourceHashCode=hashCode.toString();
         // 得到指纹以后，就可以对比不同的图片，看看64位中有多少位是不一样的。
         // 在理论上，这等同于计算"汉明距离"（Hamming distance）。
         // 如果不相同的数据位不超过5，就说明两张图片很相似；如果大于10，就说明这是两张不同的图片。
-        return sourceHashCode;
+        return hashCode.toString();
     }
 
     /**
@@ -1168,7 +1169,7 @@ public class AbImageUtil {
         // 计算哈希值。
         // 将上一步的比较结果，组合在一起，就构成了一个64位的整数，
         // 这就是这张图片的指纹。
-        StringBuffer hashCode=new StringBuffer();
+        StringBuilder hashCode=new StringBuilder();
         for (int i=0;i<comps.length;i+=4) {
             int result=comps[i]*(int)Math.pow(2,3)+comps[i+1]
                                                    *(int)Math.pow(2,2)+comps[i+2]
@@ -1176,11 +1177,10 @@ public class AbImageUtil {
                        +comps[i+2];
             hashCode.append(MathUtil.binaryToHex(result));
         }
-        String sourceHashCode=hashCode.toString();
         // 得到指纹以后，就可以对比不同的图片，看看64位中有多少位是不一样的。
         // 在理论上，这等同于计算"汉明距离"（Hamming distance）。
         // 如果不相同的数据位不超过5，就说明两张图片很相似；如果大于10，就说明这是两张不同的图片。
-        return sourceHashCode;
+        return hashCode.toString();
     }
 
     /**
@@ -1305,9 +1305,8 @@ public class AbImageUtil {
         }
         ByteArrayInputStream isBm  =new ByteArrayInputStream(baos.toByteArray());
         //把压缩后的数据baos存放到ByteArrayInputStream中
-        Bitmap               bitmap=BitmapFactory.decodeStream(isBm,null,null);
         //把ByteArrayInputStream数据生成图片
-        return bitmap;
+        return BitmapFactory.decodeStream(isBm,null,null);
     }
 
 

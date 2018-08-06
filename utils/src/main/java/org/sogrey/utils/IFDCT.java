@@ -29,9 +29,7 @@ public class IFDCT  implements DCT {
 		public static double[][] iFDctTransform(double[][] ablk) {
 			double[][] blk = new double[8][8];
 			for (int i = 0; i < 8; i++) {
-				for (int j = 0; j < 8; j++) {
-					blk[i][j] = ablk[i][j];
-				}
+				System.arraycopy(ablk[i], 0, blk[i], 0, 8);
 			}
 			// 对列做IDCT
 			for (int j = 0; j <= 7; j++) {

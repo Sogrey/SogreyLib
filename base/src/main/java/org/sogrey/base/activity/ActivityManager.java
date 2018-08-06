@@ -5,7 +5,6 @@ import android.text.TextUtils;
 
 import java.lang.ref.SoftReference;
 import java.util.HashMap;
-import java.util.Iterator;
 import java.util.Map.Entry;
 
 
@@ -25,8 +24,8 @@ public class ActivityManager {
         return activityManager;
     }
 
-    private final HashMap<String, SoftReference<Activity>> taskMap = new HashMap<String, SoftReference<Activity>>();
-    private final HashMap<String, SoftReference<Class<?>>> taskMapCls = new HashMap<String, SoftReference<Class<?>>>();
+    private final HashMap<String, SoftReference<Activity>> taskMap = new HashMap<>();
+    private final HashMap<String, SoftReference<Class<?>>> taskMapCls = new HashMap<>();
 
 
     public final void putActivity(Activity atv) {
@@ -55,7 +54,7 @@ public class ActivityManager {
     }
 
     public final void putActivityCls(Class<?> cls) {
-        taskMapCls.put(cls.getName(), new SoftReference<Class<?>>(cls));
+        taskMapCls.put(cls.getName(), new SoftReference<>(cls));
     }
 
     public final boolean hasActivityCls(Class<?> cls) {
@@ -71,9 +70,9 @@ public class ActivityManager {
     }
 
     public final void exit() {
-        for (Iterator<Entry<String, SoftReference<Activity>>> iterator = taskMap
-                .entrySet().iterator(); iterator.hasNext(); ) {
-            SoftReference<Activity> activityReference = iterator.next()
+        for (Entry<String, SoftReference<Activity>> stringSoftReferenceEntry : taskMap
+                .entrySet()) {
+            SoftReference<Activity> activityReference = stringSoftReferenceEntry
                     .getValue();
             Activity activity = activityReference.get();
             if (activity != null) {

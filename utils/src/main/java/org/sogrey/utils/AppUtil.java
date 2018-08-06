@@ -34,14 +34,12 @@ import android.util.DisplayMetrics;
 import android.view.inputmethod.InputMethodManager;
 
 import java.io.File;
-import java.io.FileFilter;
 import java.io.FileOutputStream;
 import java.io.InputStream;
 import java.net.InetAddress;
 import java.net.NetworkInterface;
 import java.net.SocketException;
 import java.util.Enumeration;
-import java.util.Iterator;
 import java.util.List;
 import java.util.regex.Pattern;
 
@@ -100,11 +98,10 @@ public class AppUtil {
 		boolean isRunning = false;
 		ActivityManager activityManager = (ActivityManager) ctx
 				.getSystemService(Context.ACTIVITY_SERVICE);
+		assert activityManager != null;
 		List<RunningServiceInfo> servicesList = activityManager
 				.getRunningServices(Integer.MAX_VALUE);
-		Iterator<RunningServiceInfo> l= servicesList.iterator();
-		while (l.hasNext()) {
-			RunningServiceInfo si= (RunningServiceInfo) l.next();
+		for (RunningServiceInfo si : servicesList) {
 			if (className.equals(si.service.getClassName())) {
 				isRunning = true;
 			}
@@ -146,19 +143,11 @@ public class AppUtil {
 			// Get directory containing CPU info
 			File dir= new File("/sys/devices/system/cpu/");
 			// Filter to only list the devices we care about
-			File[] files = dir.listFiles(new FileFilter() {
-
-				@Override
-				public boolean accept(File pathname) {
-					// Check if filename is "cpu", followed by a single digit
-					// number
-					if (Pattern.matches("cpu[0-9]",pathname.getName())) {
-						return true;
-					}
-					return false;
-				}
-
-			});
+			File[] files = dir.listFiles(pathname -> {
+                // Check if filename is "cpu", followed by a single digit
+                // number
+                return Pattern.matches("cpu[0-9]",pathname.getName());
+            });
 			// Return the number of cores (virtual CPU devices)
 			return files.length;
 		} catch (Exception e) {
@@ -218,11 +207,8 @@ public class AppUtil {
 		ConnectivityManager connectivityManager = (ConnectivityManager) context
 				.getSystemService(Context.CONNECTIVITY_SERVICE);
 		NetworkInfo activeNetInfo= connectivityManager.getActiveNetworkInfo();
-		if (activeNetInfo != null
-				&&activeNetInfo.getType()==ConnectivityManager.TYPE_MOBILE) {
-			return true;
-		}
-		return false;
+		return activeNetInfo != null
+				&&activeNetInfo.getType()==ConnectivityManager.TYPE_MOBILE;
 	}
 
 	/**
@@ -271,12 +257,14 @@ public class AppUtil {
 				try {
 					fos.close();
 				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 			if (is != null) {
 				try {
 					is.close();
 				} catch (Exception e) {
+					e.printStackTrace();
 				}
 			}
 		}
@@ -302,8 +290,7 @@ public class AppUtil {
 		// xdpi=160.421, ydpi=159.497}
 		// DisplayMetrics{density=2.0, width=720, height=1280,
 		// scaledDensity=2.0, xdpi=160.42105, ydpi=160.15764}
-		DisplayMetrics mDisplayMetrics= mResources.getDisplayMetrics();
-		return mDisplayMetrics;
+		return mResources.getDisplayMetrics();
 	}
 
 	/**
@@ -558,7 +545,7 @@ public class AppUtil {
 						.getInetAddresses();enumIpAddr.hasMoreElements();) {
 					InetAddress inetAddress= enumIpAddr.nextElement();
 					if (!inetAddress.isLoopbackAddress()) {
-						return inetAddress.getHostAddress().toString();
+						return inetAddress.getHostAddress();
 					}
 				}
 			}

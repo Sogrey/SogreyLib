@@ -250,7 +250,7 @@ public class RTextView extends android.support.v7.widget.AppCompatTextView {
         mStateBackground.addState(states[3], mBackgroundUnable);
         mStateBackground.addState(states[2], mBackgroundNormal);
 
-        if (isEnabled() == false) {
+        if (!isEnabled()) {
             mIcon = mIconUnable;
         } else {
             mIcon = mIconNormal;
@@ -803,7 +803,6 @@ public class RTextView extends android.support.v7.widget.AppCompatTextView {
             mBorderRadii[6] = mCornerRadiusBottomLeft;
             mBorderRadii[7] = mCornerRadiusBottomLeft;
             setRadiusRadii();
-            return;
         }
     }
 

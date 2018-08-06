@@ -38,7 +38,7 @@ public  class SwipeBackLayout extends FrameLayout {
 	private boolean  isFinish;
 	private Drawable mShadowDrawable;
 	private Activity mActivity;
-	private List<ViewPager> mViewPagers= new LinkedList<ViewPager>();
+	private List<ViewPager> mViewPagers= new LinkedList<>();
 
 	public SwipeBackLayout(Context context, AttributeSet attrs) {
 		this(context, attrs, 0);

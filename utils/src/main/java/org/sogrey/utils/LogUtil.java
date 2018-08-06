@@ -31,16 +31,16 @@ public class LogUtil {
 
 	private static final String  TAG= "LogUtil";
 	/** debug开关. */
-	public static        boolean D  =true&& BuildConfig.DEBUG;
+	public static        boolean D  = BuildConfig.DEBUG;
 
 	/** info开关. */
-	public static boolean I = true && BuildConfig.DEBUG;
+	public static boolean I = BuildConfig.DEBUG;
 
 	/** warn开关. */
-	public static boolean W = true && BuildConfig.DEBUG;
+	public static boolean W = BuildConfig.DEBUG;
 
 	/** error开关. */
-	public static boolean E = true && BuildConfig.DEBUG;
+	public static boolean E = BuildConfig.DEBUG;
 
 	/** 起始执行时间. */
 	public static long startLogTimeInMillis = 0;

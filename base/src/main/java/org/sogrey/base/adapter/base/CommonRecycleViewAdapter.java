@@ -32,13 +32,12 @@ public abstract class CommonRecycleViewAdapter<T> extends RecyclerView
     @Override
     public CommonRecycleViewHolder onCreateViewHolder(ViewGroup parent,int viewType) {
         View itemView=mInflater.inflate(this.mLayoutId,parent,false);
-        CommonRecycleViewHolder holder=new CommonRecycleViewHolder(itemView) {
+        return new CommonRecycleViewHolder(itemView) {
             @Override
             public Context getContext() {
                 return mContext;
             }
         };
-        return holder;
     }
     @Override
     public void onBindViewHolder(CommonRecycleViewHolder holder,int position) {

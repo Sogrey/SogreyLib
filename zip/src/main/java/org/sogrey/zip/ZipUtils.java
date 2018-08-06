@@ -157,8 +157,8 @@ public class ZipUtils {
                 zipOutputSteam.closeEntry();
             }
             //子文件和递归
-            for (int i = 0; i < fileList.length; i++) {
-                ZipFiles(folderString, fileString + File.separator + fileList[i], zipOutputSteam);
+            for (String aFileList : fileList) {
+                ZipFiles(folderString, fileString + File.separator + aFileList, zipOutputSteam);
             }
         }
     }
@@ -187,7 +187,7 @@ public class ZipUtils {
      * @throws Exception
      */
     public static List<File> GetFileList(String zipFileString, boolean bContainFolder, boolean bContainFile) throws Exception {
-        List<File> fileList = new ArrayList<File>();
+        List<File> fileList = new ArrayList<>();
         ZipInputStream inZip = new ZipInputStream(new FileInputStream(zipFileString));
         ZipEntry zipEntry;
         String szName = "";

@@ -12,13 +12,10 @@ import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
-
 
 import org.sogrey.base.BaseApplication;
 import org.sogrey.base.R;
@@ -51,7 +48,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         mContext = this;
         manager.putActivity(this);
         if (mLinkedMap == null) {
-            mLinkedMap = new LinkedHashMap<String, Boolean>();
+            mLinkedMap = new LinkedHashMap<>();
         }
         setContentView(getLayoutRedId());
 //        ButterKnife.bind(this);
@@ -145,7 +142,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     }
 
     public void finishThisDelay() {
-        new Handler().postDelayed(() -> finishThis(), 1000);
+        new Handler().postDelayed(this::finishThis, 1000);
     }
 
     public void finishThisRemain() {
@@ -154,7 +151,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     }
 
     public void finishThisRemainDelay() {
-        new Handler().postDelayed(() -> finishThisRemain(), 1000);
+        new Handler().postDelayed(this::finishThisRemain, 1000);
     }
 
     /**
@@ -168,14 +165,14 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 
     public void putNetWorkFlag(String key, boolean val) {
         if (mLinkedMap == null) {
-            mLinkedMap = new LinkedHashMap<String, Boolean>();
+            mLinkedMap = new LinkedHashMap<>();
         }
         mLinkedMap.put(key, val);
     }
 
     public boolean getNetWorkFlag(String key, boolean val) {
         if (mLinkedMap == null) {
-            mLinkedMap = new LinkedHashMap<String, Boolean>();
+            mLinkedMap = new LinkedHashMap<>();
         }
         if (mLinkedMap.containsKey(key)) {
             val = mLinkedMap.get(key);
@@ -187,7 +184,7 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
 
     public void clearAllNetWorkFlag() {
         if (mLinkedMap == null) {
-            mLinkedMap = new LinkedHashMap<String, Boolean>();
+            mLinkedMap = new LinkedHashMap<>();
         }
         mLinkedMap.clear();
         mLinkedMap = null;
@@ -289,19 +286,16 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         intent.setClass(this, cls);
         if (bundle != null)
             intent.putExtras(bundle);
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
+        new Handler().postDelayed(() -> {
 
-                startActivity(intent);
-                if (animIn != 0 && animOut != 0) {
-                    try {
-                        overridePendingTransition(animIn, animOut);
-                        if (isFinish)
-                            finish();
-                    } catch (Exception e) {
-                        e.printStackTrace();
-                    }
+            startActivity(intent);
+            if (animIn != 0 && animOut != 0) {
+                try {
+                    overridePendingTransition(animIn, animOut);
+                    if (isFinish)
+                        finish();
+                } catch (Exception e) {
+                    e.printStackTrace();
                 }
             }
         }, delay < 0 ? DELAY : delay);
@@ -427,19 +421,16 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
     }
 
     public Drawable getResDrawable(@DrawableRes int id) {
-        Drawable drawable = getResDrawable(mContext, id);
-        return drawable;
+        return getResDrawable(mContext, id);
     }
 
     public Drawable getResDrawable(Context context, @DrawableRes int id) {
         if(context==null) context = BaseApplication.getInstance();
-        Drawable drawable = ContextCompat.getDrawable(context, id);
-        return drawable;
+        return ContextCompat.getDrawable(context, id);
     }
 
     public int getResColor(@ColorRes int id) {
-        int color = ContextCompat.getColor(mContext, id);
-        return color;
+        return ContextCompat.getColor(mContext, id);
     }
 
     public int getResColor(Context context, @DrawableRes int id) {

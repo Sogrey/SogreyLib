@@ -106,9 +106,7 @@ public class DateUtil {
      */
     protected static final float normalizedJulian(float JD) {
 
-        float f=Math.round(JD+0.5f)-0.5f;
-
-        return f;
+        return Math.round(JD+0.5f)-0.5f;
     }
 
     /**
@@ -191,13 +189,12 @@ public class DateUtil {
         caled.set(GregorianCalendar.SECOND,0);
 
         // 得到两个日期相差的天数
-        int days=(
+        return (
                          (int)(caled.getTime().getTime()/1000)-(int)(
                                  calst
                                          .getTime().getTime()/1000
                          )
                  )/3600/24;
-        return days;
     }
 
     /**
@@ -236,9 +233,8 @@ public class DateUtil {
         int   C =2-A+B;
         float E =(int)(365.25f*(Y+4716));
         float F =(int)(30.6001f*(M+1));
-        float JD=C+D+E+F-1524.5f;
 
-        return JD;
+        return C+D+E+F-1524.5f;
     }
 
     /**
@@ -431,9 +427,8 @@ public class DateUtil {
         int              years_value=Integer.parseInt(years);
         int              start_days =1;
         int              end_days   =getLastDayOfMonth(years_value,end_month);
-        String seasonDate=years_value+"-"+start_month+"-"+start_days
+        return years_value+"-"+start_month+"-"+start_days
                           +" ";
-        return seasonDate;
     }
 
     private static int getLastDayOfMonth(int year,int month) {
@@ -486,8 +481,7 @@ public class DateUtil {
             date.setHours(0);
             date.setMinutes(0);
             date.setSeconds(0);
-            Date date2=new Date(date.getTime()+time);
-            date=date2;
+            date= new Date(date.getTime()+time);
 
             SimpleDateFormat sfDate=new SimpleDateFormat(pattern);
             sfDate.setLenient(false);
@@ -585,9 +579,8 @@ public class DateUtil {
      */
     public static Date getCurrentDateTime() {
         Calendar calNow=Calendar.getInstance();
-        Date     dtNow =calNow.getTime();
 
-        return dtNow;
+        return calNow.getTime();
     }
 
     /**
@@ -913,8 +906,7 @@ public class DateUtil {
     // 计算当月;
     public static int getDefaultDay() {
         Calendar lastDate=Calendar.getInstance();
-        int      month   =(lastDate.get(Calendar.MONTH))+1;
-        return month;
+        return (lastDate.get(Calendar.MONTH))+1;
     }
 
     // 返回年初;
@@ -929,8 +921,7 @@ public class DateUtil {
     public static int getDefaultYears() {
 
         Calendar lastDate=Calendar.getInstance();
-        int      year    =lastDate.get(Calendar.YEAR);
-        return year;
+        return lastDate.get(Calendar.YEAR);
     }
 
     // 获取本周周一;
@@ -1050,7 +1041,7 @@ public class DateUtil {
      * @return the List is never null.
      */
     public static List<String> getCurrentAndLastMonth() {
-        List<String> yearMs=new ArrayList<String>();
+        List<String> yearMs= new ArrayList<>();
         Calendar     cal   =GregorianCalendar.getInstance();
         cal.setTime(new Date());
 
@@ -1095,10 +1086,9 @@ public class DateUtil {
 
     public static String getCurrentYearWeek() {
         Calendar cal=Calendar.getInstance();
-        String rtn=String.format("%4d%2d",cal.get(Calendar.YEAR),
+        return String.format("%4d%2d",cal.get(Calendar.YEAR),
                                  cal.get(Calendar.WEEK_OF_YEAR)
         );
-        return rtn;
     }
 
     /**
@@ -1176,8 +1166,8 @@ public class DateUtil {
      * @return
      */
 
-    public static final boolean isEmpty(Date date) {
-        return (date==null) ? true : date.toString().length()<1;
+    public static boolean isEmpty(Date date) {
+        return (date == null) || date.toString().length() < 1;
     }
 
     /**
@@ -1215,11 +1205,11 @@ public class DateUtil {
 
         if (isDaylightSavingTime()) {
             c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),
-                  c.get(Calendar.DAY_OF_MONTH),12,00,00
+                  c.get(Calendar.DAY_OF_MONTH),12, 0, 0
             );
         } else {
             c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),
-                  c.get(Calendar.DAY_OF_MONTH),12,00,00
+                  c.get(Calendar.DAY_OF_MONTH),12, 0, 0
             );
         }
 
@@ -1239,11 +1229,11 @@ public class DateUtil {
 
         if (isDaylightSavingTime()) {
             c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),
-                  c.get(Calendar.DAY_OF_MONTH),14,00,00
+                  c.get(Calendar.DAY_OF_MONTH),14, 0, 0
             );
         } else {
             c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),
-                  c.get(Calendar.DAY_OF_MONTH),13,30,00
+                  c.get(Calendar.DAY_OF_MONTH),13,30, 0
             );
         }
 
@@ -1276,11 +1266,11 @@ public class DateUtil {
 
         if (isDaylightSavingTime()) {
             c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),
-                  c.get(Calendar.DAY_OF_MONTH),18,00,00
+                  c.get(Calendar.DAY_OF_MONTH),18, 0, 0
             );
         } else {
             c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),
-                  c.get(Calendar.DAY_OF_MONTH),17,30,00
+                  c.get(Calendar.DAY_OF_MONTH),17,30, 0
             );
         }
 
@@ -1300,11 +1290,11 @@ public class DateUtil {
 
         if (isDaylightSavingTime()) {
             c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),
-                  c.get(Calendar.DAY_OF_MONTH),8,00,00
+                  c.get(Calendar.DAY_OF_MONTH),8, 0, 0
             );
         } else {
             c.set(c.get(Calendar.YEAR),c.get(Calendar.MONTH),
-                  c.get(Calendar.DAY_OF_MONTH),8,00,00
+                  c.get(Calendar.DAY_OF_MONTH),8, 0, 0
             );
         }
 
@@ -1390,14 +1380,12 @@ public class DateUtil {
         int years=calEnterDate.get(Calendar.YEAR)
                   -paybaseDate.get(Calendar.YEAR);
 
-        int number=12
+        return 12
                    *years
                    +(
                            calEnterDate.get(Calendar.MONTH)-paybaseDate
                                    .get(Calendar.MONTH)
                    );
-
-        return number;
     }
 
     /**
@@ -1442,7 +1430,7 @@ public class DateUtil {
      * @date : 2012-6-6
      */
     public static List<String> getFirstNMonths(Integer n) {
-        List<String> monthList=new ArrayList<String>();
+        List<String> monthList= new ArrayList<>();
         int          i        =0;
         while (i<n) {
             if (i==0) {
@@ -1469,7 +1457,7 @@ public class DateUtil {
      * @date : 2012-6-7
      */
     public static List<String> getSpecifiedFirstNMonths(String date,Integer n) {
-        List<String> monthList=new ArrayList<String>();
+        List<String> monthList= new ArrayList<>();
         int          i        =0;
         while (i<n) {
             if (i==0) {
@@ -1652,7 +1640,7 @@ public class DateUtil {
      * @date : 2013-7-5
      */
     public static List<Date> getDaysOfMonth(Integer year,Integer month) {
-        List<Date> result=new ArrayList<Date>();
+        List<Date> result= new ArrayList<>();
         Calendar   cal   =Calendar.getInstance();
         cal.set(Calendar.YEAR,year);
         cal.set(Calendar.MONTH,month-1);
@@ -1929,7 +1917,7 @@ public class DateUtil {
         int  thenDay  =thenCalendar.get(Calendar.DAY_OF_MONTH);
         if (thenCalendar.after(today))// today
         {
-            if (timediff<1*60*1000) {
+            if (timediff< 60 * 1000) {
                 strDesc="刚刚";
             } else if (timediff<60*60*1000) {
                 strDesc=(timediff/60/1000)+"分钟之前";
@@ -2369,6 +2357,7 @@ public class DateUtil {
             date=getDateByFormat(currentDate+" 00:00:00",dateFormatYMDHMS);
             return date.getTime();
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return -1;
     }
@@ -2385,6 +2374,7 @@ public class DateUtil {
             date=getDateByFormat(currentDate+" 24:00:00",dateFormatYMDHMS);
             return date.getTime();
         } catch (Exception e) {
+            e.printStackTrace();
         }
         return -1;
     }
@@ -2468,6 +2458,7 @@ public class DateUtil {
                 return out;
             }
         } catch (Exception e) {
+            e.printStackTrace();
         }
 
         return strDate;

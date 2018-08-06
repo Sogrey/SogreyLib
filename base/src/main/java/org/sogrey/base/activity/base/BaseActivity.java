@@ -13,8 +13,6 @@ import android.support.annotation.DrawableRes;
 import android.support.annotation.NonNull;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
-import android.text.TextUtils;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.Window;
 import android.view.WindowManager;
@@ -51,7 +49,7 @@ public abstract class BaseActivity extends AppCompatActivity {
         mContext=this;
         manager.putActivity(this);
         if (mLinkedMap==null) {
-            mLinkedMap=new LinkedHashMap<String,Boolean>();
+            mLinkedMap= new LinkedHashMap<>();
         }
         setContentView(getLayoutRedId());
         init();
@@ -194,7 +192,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void finishThisDelay() {
-        new Handler().postDelayed(() -> finishThis(),1000);
+        new Handler().postDelayed(this::finishThis,1000);
     }
 
     public void finishThisRemain() {
@@ -203,7 +201,7 @@ public abstract class BaseActivity extends AppCompatActivity {
     }
 
     public void finishThisRemainDelay() {
-        new Handler().postDelayed(() -> finishThisRemain(),1000);
+        new Handler().postDelayed(this::finishThisRemain,1000);
     }
 
     /**
@@ -217,14 +215,14 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void putNetWorkFlag(String key,boolean val) {
         if (mLinkedMap==null) {
-            mLinkedMap=new LinkedHashMap<String,Boolean>();
+            mLinkedMap= new LinkedHashMap<>();
         }
         mLinkedMap.put(key,val);
     }
 
     public boolean getNetWorkFlag(String key,boolean val) {
         if (mLinkedMap==null) {
-            mLinkedMap=new LinkedHashMap<String,Boolean>();
+            mLinkedMap= new LinkedHashMap<>();
         }
         if (mLinkedMap.containsKey(key)) {
             val=mLinkedMap.get(key);
@@ -236,7 +234,7 @@ public abstract class BaseActivity extends AppCompatActivity {
 
     public void clearAllNetWorkFlag() {
         if (mLinkedMap==null) {
-            mLinkedMap=new LinkedHashMap<String,Boolean>();
+            mLinkedMap= new LinkedHashMap<>();
         }
         mLinkedMap.clear();
         mLinkedMap=null;
@@ -512,19 +510,16 @@ public abstract class BaseActivity extends AppCompatActivity {
         return getResources().getString(resId,o);
     }
     public Drawable getResDrawable(@DrawableRes int id) {
-        Drawable drawable = getResDrawable(mContext, id);
-        return drawable;
+        return getResDrawable(mContext, id);
     }
 
     public Drawable getResDrawable(Context context, @DrawableRes int id) {
         if(context==null) context = BaseApplication.getInstance();
-        Drawable drawable = ContextCompat.getDrawable(context, id);
-        return drawable;
+        return ContextCompat.getDrawable(context, id);
     }
 
     public int getResColor(@ColorRes int id) {
-        int color = ContextCompat.getColor(mContext, id);
-        return color;
+        return ContextCompat.getColor(mContext, id);
     }
 
     public int getResColor(Context context, @DrawableRes int id) {

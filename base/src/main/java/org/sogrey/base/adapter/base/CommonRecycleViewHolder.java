@@ -30,7 +30,7 @@ public abstract class CommonRecycleViewHolder extends RecyclerView.ViewHolder {
     public CommonRecycleViewHolder(View itemView) {
         super(itemView);
         this.mConvertView = itemView;
-        this.mView = new SparseArray<View>();
+        this.mView = new SparseArray<>();
         this.mContext = getContext();
     }
 
@@ -404,7 +404,7 @@ public abstract class CommonRecycleViewHolder extends RecyclerView.ViewHolder {
     public void setOnFocusChangeListener(int viewId, View.OnFocusChangeListener onFocusChangeListener) {
         View view = getView(viewId);
         if (view instanceof EditText) {
-            ((EditText) view).setOnFocusChangeListener(onFocusChangeListener);
+            view.setOnFocusChangeListener(onFocusChangeListener);
         }
     }
 }

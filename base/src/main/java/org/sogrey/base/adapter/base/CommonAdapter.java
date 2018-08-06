@@ -1,10 +1,5 @@
-/**
- * @author Sogrey
- * @date 2015-05-11
- */
 package org.sogrey.base.adapter.base;
 
-import android.app.Activity;
 import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,9 +19,9 @@ import java.util.List;
 public abstract class CommonAdapter<T> extends BaseAdapter {
 
 	protected Context mContext;
-	protected List<T>       mLst= new ArrayList<T>();
+	protected List<T>       mLst= new ArrayList<>();
 	protected List<Integer> mPositions
-			= new ArrayList<Integer>();
+			= new ArrayList<>();
 	protected int mLayoutId;
 
 	/**
