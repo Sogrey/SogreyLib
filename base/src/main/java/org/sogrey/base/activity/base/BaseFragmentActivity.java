@@ -39,12 +39,12 @@ public abstract class BaseFragmentActivity extends FragmentActivity {
         super.onCreate(savedInstanceState);
         this.requestWindowFeature(Window.FEATURE_NO_TITLE);//去掉标题栏
 //        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);//去掉信息栏
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            setTranslucentStatus(true);
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            setTranslucentStatus(true);
 //            SystemBarTintManager tintManager = new SystemBarTintManager(this);
 //            tintManager.setStatusBarTintEnabled(true);
 //            tintManager.setStatusBarTintResource(R.color.bg_statusbar);//通知栏所需颜色
-        }
+//        }
         mContext = this;
         manager.putActivity(this);
         if (mLinkedMap == null) {

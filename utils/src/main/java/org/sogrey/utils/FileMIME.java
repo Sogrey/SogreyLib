@@ -583,17 +583,7 @@ public class FileMIME {
         // 获取文件file的MIME类型
         String type = GetFileMIME(file.getAbsolutePath());
         // 设置intent的data和Type属性。
-        Uri fileUri = null;
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//api 24 即android 7.0  -  文件管理权限
-            try {
-                fileUri = FileProvider.getUriForFile(context, context.getPackageName() + ".fileprovider", file);
-            } catch (Exception e) {
-                LogUtil.e("请先为适配Android 7.0 添加fileprovider的xml文件以及在manifest中注册。");
-                e.printStackTrace();
-            }
-        } else {
-            fileUri = Uri.fromFile(file);
-        }
+        Uri fileUri = getUri(context,file);
         intent.setDataAndType(fileUri, type);
         intent.addFlags(Intent.FLAG_GRANT_READ_URI_PERMISSION | Intent.FLAG_GRANT_WRITE_URI_PERMISSION);//授予临时读写权限
         // 跳转
@@ -615,4 +605,20 @@ public class FileMIME {
 //	 (new StringBuilder()).append("attachment;filename=\"")
 //	 .append(new String(name.getBytes("GBK"),
 //	 "ISO8859_1")).append("\"").toString());
+    public static Uri getUri(Context context, String filePath) {
+        File file = new File(filePath);
+        return getUri(context, file);
+    }
+
+    public static Uri getUri(Context context, File file) {
+        Uri fileUri = null;
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {//api 24 即android 7.0  -  文件管理权限
+            //android 7.0要创建 res/xml/file_provider.xml
+            //并且在AndroidManifest.xml里声明
+            fileUri = FileProvider.getUriForFile(context, context.getPackageName()+".fileprovider", file);
+        } else {
+            fileUri = Uri.fromFile(file);
+        }
+        return fileUri;
+    }
 }

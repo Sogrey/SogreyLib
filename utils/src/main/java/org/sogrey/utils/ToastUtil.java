@@ -47,6 +47,11 @@ public class ToastUtil {
         mContext = context;
     }
 
+    /**
+     * 用于全局使用
+     * @param context
+     * @return
+     */
     public static ToastUtil getSingleton(Context context) {
         if (mToastUtil == null) {
             return mToastUtil = new ToastUtil(context);

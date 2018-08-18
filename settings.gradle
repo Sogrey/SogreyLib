@@ -1,1 +1,1 @@
-include ':app', ':http', ':views', ':utils', ':camera', ':zxing', ':db', ':base', ':zip', ':jsbridge', ':ftp'
+include ':app', ':http', ':views',':camera', ':utils', ':zxing', ':db', ':base', ':zip', ':jsbridge', ':ftp'

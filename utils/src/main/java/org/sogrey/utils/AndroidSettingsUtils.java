@@ -6,9 +6,12 @@ import android.content.Intent;
 
 /**
  * android 设置相关，跳转到相关设置页面
+ *
+ * @Deprecated {@link IntentUtils}
+ * <p>
  * Created by Sogrey on 2018/8/1.
  */
-
+@Deprecated
 public class AndroidSettingsUtils {
     //    Android系统设置选项的包名
 //    以com.android.settings开头的形式
@@ -75,7 +78,7 @@ public class AndroidSettingsUtils {
     public static final String ACTION_NETWORK_OPERATOR_SETTINGS = android.provider.Settings.ACTION_NETWORK_OPERATOR_SETTINGS;//选择网络运营商界面
     public static final String ACTION_NFCSHARING_SETTINGS = android.provider.Settings.ACTION_NFCSHARING_SETTINGS;//* 显示NFC共享设置，API 14及以上*
     public static final String ACTION_NFC_SETTINGS = android.provider.Settings.ACTION_NFC_SETTINGS;//显示NFC设置，API 16及以上
-    public static final String ACTION_PRINT_SETTINGS = android.provider.Settings.ACTION_PRINT_SETTINGS;//打印设置
+    public static final String ACTION_PRINT_SETTINGS = android.provider.Settings.ACTION_PRINT_SETTINGS;//打印设置,api 19
     public static final String ACTION_PRIVACY_SETTINGS = android.provider.Settings.ACTION_PRIVACY_SETTINGS;//备份和重置界面
     public static final String ACTION_QUICK_LAUNCH_SETTINGS = android.provider.Settings.ACTION_QUICK_LAUNCH_SETTINGS;//快速启动设置界面
     public static final String ACTION_SEARCH_SETTINGS = android.provider.Settings.ACTION_SEARCH_SETTINGS;//搜索设置界面
@@ -101,8 +104,8 @@ public class AndroidSettingsUtils {
      */
     public void go2SettingsByAction(String action) {
         try {
-            Intent wifiSettingsIntent = new Intent(action);
-            mContext.startActivity(wifiSettingsIntent);
+            Intent intent = new Intent(action);
+            mContext.startActivity(intent);
         } catch (Exception e) {
             e.printStackTrace();
         }
@@ -110,6 +113,7 @@ public class AndroidSettingsUtils {
 
     /**
      * 跳到设置页面
+     *
      * @param settingsClz AndroidSettingsUtils#ANDROID_SETTINGS_*，例如跳到Wi-Fi列表设置界面：{@link AndroidSettingsUtils#ANDROID_SETTINGS_WirelessSettings}
      */
     public void go2Settings(String settingsClz) {

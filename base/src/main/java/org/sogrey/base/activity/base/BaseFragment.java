@@ -1,6 +1,8 @@
 package org.sogrey.base.activity.base;
 
 import android.annotation.SuppressLint;
+import android.app.Activity;
+import android.app.Fragment;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.Drawable;
@@ -8,7 +10,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.ColorRes;
 import android.support.annotation.DrawableRes;
-import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
@@ -29,7 +30,7 @@ public abstract class BaseFragment extends Fragment {
 
     private LayoutInflater inflater;
     protected View contentView;
-    public FragmentActivity mContext;
+    public Activity mContext;
     protected ViewGroup container;
     private static final int DELAY = 300;
 
