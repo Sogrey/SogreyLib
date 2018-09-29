@@ -95,7 +95,11 @@ public class RTextView extends android.support.v7.widget.AppCompatTextView {
     }
 
     public RTextView(Context context, AttributeSet attrs) {
-        super(context, attrs);
+        this(context, attrs,0);
+    }
+
+    public RTextView(Context context, AttributeSet attrs, int defStyleAttr) {
+        super(context, attrs, defStyleAttr);
         mContext = context;
         mTouchSlop = ViewConfiguration.get(context).getScaledTouchSlop();
         initAttributeSet(context, attrs);

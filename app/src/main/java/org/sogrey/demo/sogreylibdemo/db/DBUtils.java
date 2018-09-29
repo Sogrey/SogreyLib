@@ -10,7 +10,6 @@ import android.util.Log;
 
 import com.litesuits.orm.LiteOrm;
 import com.litesuits.orm.db.DataBaseConfig;
-import com.litesuits.orm.db.TableManager;
 import com.litesuits.orm.db.assit.QueryBuilder;
 import com.litesuits.orm.db.assit.SQLiteHelper;
 import com.litesuits.orm.db.assit.WhereBuilder;
@@ -29,7 +28,6 @@ import java.lang.reflect.Field;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
 import java.util.List;
 import java.util.Map;
 
@@ -336,6 +334,7 @@ public enum DBUtils implements SQLiteHelper.OnUpdateListener {
     }
     /////////////////////以上是基本操作/////////////////////////////////////
     /////////////////////以上是扩展操作/////////////////////////////////////
+
     /**
      * sql语句查询
      *
@@ -349,25 +348,25 @@ public enum DBUtils implements SQLiteHelper.OnUpdateListener {
     /**
      * sql语句查询
      *
-     * @param sql                完整sql语句
-     * @param cancellationSignal
-     * @return
-     */
-    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
-    public Cursor queryBySql(String sql, CancellationSignal cancellationSignal) {
-        return mRDB.rawQuery(sql, new String[]{}, cancellationSignal);
-    }
-
-    /**
-     * sql语句查询
-     *
      * @param sql 完整sql语句
      * @param cla 查询的库实体(需要与要查询的表保持一致)
      * @param <T> 数据实体类型
      * @return
      */
-    private <T> ArrayList<T> queryBySql(String sql, Class<T> cla) {
+    public <T> ArrayList<T> queryBySql(String sql, Class<T> cla) {
         return queryByCursor(queryBySql(sql), cla);
+    }
+
+    /**
+     * sql语句查询
+     *
+     * @param sql                完整sql语句
+     * @param cancellationSignal
+     * @return
+     */
+    @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
+    public Cursor queryCursorBySql(String sql, CancellationSignal cancellationSignal) {
+        return mRDB.rawQuery(sql, new String[]{}, cancellationSignal);
     }
 
     /**
@@ -380,7 +379,7 @@ public enum DBUtils implements SQLiteHelper.OnUpdateListener {
      * @return
      */
     private <T> ArrayList<T> queryBySql(String sql, CancellationSignal cancellationSignal, Class<T> cla) {
-        return queryByCursor(queryBySql(sql, cancellationSignal), cla);
+        return queryByCursor(queryCursorBySql(sql, cancellationSignal), cla);
     }
 
     /**
@@ -496,7 +495,7 @@ public enum DBUtils implements SQLiteHelper.OnUpdateListener {
      * @param typeClass
      * @return
      */
-    @SuppressWarnings("all")
+    @SuppressWarnings("unchecked")
     public static Class<? extends Object> getBasicClass(Class typeClass) {
         Class _class = basicMap.get(typeClass);
         if (_class == null)

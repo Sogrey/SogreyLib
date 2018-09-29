@@ -33,4 +33,15 @@
         tools:layout_editor_absoluteX="0dp"
         tools:layout_editor_absoluteY="48dp" />
 
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="200dp">
+
+        <org.sogrey.views.dragview.DKDragView
+            android:id="@+id/dkDragView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+    </LinearLayout>
+
+
 </LinearLayout>

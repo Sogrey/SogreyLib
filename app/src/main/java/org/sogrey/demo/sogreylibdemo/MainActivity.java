@@ -9,6 +9,8 @@ import org.sogrey.camera.CameraActivity;
 import org.sogrey.demo.sogreylibdemo.bean.Person;
 import org.sogrey.demo.sogreylibdemo.db.DBUtils;
 import org.sogrey.utils.IntentUtils;
+import org.sogrey.utils.ToastUtil;
+import org.sogrey.views.dragview.DKDragView;
 
 import java.lang.reflect.Array;
 import java.util.ArrayList;
@@ -24,11 +26,24 @@ public class MainActivity extends BaseActivity {
     @Override
     protected void init() {
         List<Person> personList = new ArrayList<>();
-        for (int i = 0; i <20 ; i++) {
-            personList.add(new Person("person"+i,10+i));
+        for (int i = 0; i < 20; i++) {
+            personList.add(new Person("person" + i, 10 + i));
         }
 
         DBUtils.INSTANCE.save(personList);
+
+
+        DKDragView dkDragView = findViewById(R.id.dkDragView);
+        dkDragView.setDrawableLeftResource(R.drawable.ic_camera)
+                .setDrawableBottomResource(R.drawable.ic_camera)
+                .setDrawableRightResource(R.drawable.ic_camera)
+                .setDrawableTopResource(R.drawable.ic_camera)
+                .setOrientation(0)
+                .setAnimation(true)
+                .setBoundary(0, 0, 0, 0)
+                .setDuration(500)
+                .setOnDragViewClickListener(() -> ToastUtil.showToast(mContext, "点击"))
+                .setOnDragViewLongClickListener(() -> ToastUtil.showToast(mContext, "长按"));
     }
 
     public void btnClickk(View view) {
@@ -61,7 +76,7 @@ public class MainActivity extends BaseActivity {
 //        Intent intent =  new Intent(Settings.ACTION_DREAM_SETTINGS);
 //        startActivity(intent);
 
-        IntentUtils.getInstance().go2Settings(this, Settings.ACTION_DEVICE_INFO_SETTINGS );
+        IntentUtils.getInstance().go2Settings(this, Settings.ACTION_DEVICE_INFO_SETTINGS);
 
     }
 
@@ -70,11 +85,11 @@ public class MainActivity extends BaseActivity {
 //        IntentUtils.getInstance().go2Settings(this, Settings.ACTION_APPLICATION_DEVELOPMENT_SETTINGS );
 
 
-      ArrayList<Person> personArrayList =  DBUtils.INSTANCE.queryBySql("select * from tb_person where age%3=1",Person.class);
-      if(personArrayList!=null&&!personArrayList.isEmpty()){
-          for (Person person : personArrayList) {
-              Log.e("XXX",person.toString());
-          }
-      }
+        ArrayList<Person> personArrayList = DBUtils.INSTANCE.queryBySql("select * from tb_person where age%3=1", Person.class);
+        if (personArrayList != null && !personArrayList.isEmpty()) {
+            for (Person person : personArrayList) {
+                Log.e("XXX", person.toString());
+            }
+        }
     }
 }

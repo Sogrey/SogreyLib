@@ -1,5 +1,5 @@
 apply plugin: 'com.android.library'
-
+apply plugin: 'com.novoda.bintray-release'//添加
 android {
     compileSdkVersion project.ext.compileSdkVersion
 
@@ -30,6 +30,24 @@ android {
         checkReleaseBuilds false
         abortOnError false
     }
+
+    lintOptions {
+        abortOnError false
+    }
+
+    tasks.whenTaskAdded { task ->
+        if (task.name.contains("lint")//如果instant run不生效，把clean这行干掉
+                ||task.name.equals("clean")//项目中有用到aidl则不可以舍弃这个任务
+                ||task.name.contains("Aidl")//用不到测试的时候就可以先关闭
+                ||task.name.contains("mockableAndroidJar")
+                ||task.name.contains("UnitTest")
+                ||task.name.contains("AndroidTest")//用不到NDK和JNI的也关闭掉
+                || task.name.contains("Ndk")
+                || task.name.contains("Jni")
+        ) {
+            task.enabled = false
+        }
+    }
 }
 
 dependencies {
@@ -41,4 +59,40 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:multidex:1.0.3'
+}
+
+
+//添加
+publish {
+    userOrg = 'sogrey'//bintray.com用户名
+    groupId = 'org.sogrey'//jcenter上的路径
+    artifactId = 'base'//项目名称
+    publishVersion = '0.0.1'//版本号
+    desc = 'Android framework'//描述，不重要
+    website = 'https://github.com/Sogrey/SogreyLib/tree/master/base'//网站，不重要；尽量模拟github上的地址，例如我这样的；当然你有地址最好了
+}
+
+tasks.withType(JavaCompile) {
+    options.encoding = "utf-8"
+}
+
+task sourcesJar(type: Jar) {
+    from android.sourceSets.main.java.srcDirs
+    classifier = 'sources'
+}
+
+task javadoc(type: Javadoc) {
+    source = android.sourceSets.main.java.srcDirs
+    classpath += project.files(android.getBootClasspath().join(File.pathSeparator))
+    options.encoding = "UTF-8"
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifacts {
+    archives javadocJar
+    archives sourcesJar
 }

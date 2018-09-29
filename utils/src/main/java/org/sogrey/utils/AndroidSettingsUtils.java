@@ -6,10 +6,12 @@ import android.content.Intent;
 
 /**
  * android 设置相关，跳转到相关设置页面
+ * <p>
+ * Created by Sogrey on 2018/8/1.
  *
  * @Deprecated {@link IntentUtils}
  * <p>
- * Created by Sogrey on 2018/8/1.
+ * @see IntentUtils
  */
 @Deprecated
 public class AndroidSettingsUtils {
